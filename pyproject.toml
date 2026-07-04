@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "proofloop-evals"
-version = "0.1.0"
+version = "1.0.0"
 description = "Ship AI apps with tests, not vibes."
 readme = "README.md"
 requires-python = ">=3.11"

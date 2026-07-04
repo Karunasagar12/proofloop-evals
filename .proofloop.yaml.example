@@ -1,0 +1,11 @@
+provider:
+  base_url: https://api.openai.com/v1
+  api_key: ${PROOFLOOP_API_KEY}
+  model: gpt-4o-mini
+  timeout: 30
+
+judge:
+  base_url: ${PROOFLOOP_JUDGE_BASE_URL:-https://api.openai.com/v1}
+  api_key: ${PROOFLOOP_JUDGE_API_KEY:-${PROOFLOOP_API_KEY}}
+  model: ${PROOFLOOP_JUDGE_MODEL:-gpt-4o}
+  timeout: 60
