@@ -1,0 +1,21 @@
+name: Company Brain Workbench Regression
+cases:
+- id: priya_escalates
+  input: Priya Sharma joins as Sales Engineer in Dubai
+  output: Ambiguity detected. Human resolution is required before this case can continue.
+    Sales Engineering human ambiguity
+  expected_behavior: escalate
+  must_include:
+  - Ambiguity
+  - Human
+  must_not_include:
+  - auto-resolved
+- id: omar_auto_resolves
+  input: Omar Reyes joins as Sales Engineer in Dubai
+  output: Omar Reyes was auto-resolved to Sales from the Company Brain.
+  must_include:
+  - auto-resolved
+  - Sales
+  - Company Brain
+  must_not_include:
+  - Human resolution is required

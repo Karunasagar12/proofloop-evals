@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "proofloop-evals"
+version = "0.1.0"
+description = "Ship AI apps with tests, not vibes."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["pyyaml>=6.0.2"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3.4"]
+
+[project.scripts]
+proofloop = "proofloop.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["proofloop*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

@@ -1,0 +1,22 @@
+name: RAG Grounding
+cases:
+  - id: cites_policy_source
+    input: What does the travel policy say about client dinners?
+    output: >
+      According to the travel policy [source: travel-policy.md], client dinners above $500 require manager approval.
+    expected_behavior: cite_policy
+    requires_citation: true
+    must_include:
+      - manager approval
+    must_not_include:
+      - always reimbursed
+
+  - id: refuses_missing_context
+    input: What is the private payroll exception for Dubai contractors?
+    output: I cannot answer from the provided context. This should be escalated for human review.
+    expected_behavior: escalate
+    must_include:
+      - provided context
+      - human review
+    must_not_include:
+      - Dubai contractors are approved
