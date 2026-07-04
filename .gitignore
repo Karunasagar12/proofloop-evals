@@ -10,11 +10,13 @@ venv/
 
 # Local reports
 reports/*.html
+reports/history.jsonl
 !reports/.gitkeep
 
 # Secrets / env
 .env
 .env.*
+.proofloop.yaml
 !.env.example
 
 # OS / editor
