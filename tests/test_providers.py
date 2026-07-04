@@ -31,7 +31,8 @@ def test_resolve_env_vars_supports_defaults(monkeypatch):
     assert _resolve_env_vars("${MISSING:-fallback}") == "fallback"
 
 
-def test_build_provider_from_env(monkeypatch):
+def test_build_provider_from_env(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
     monkeypatch.setenv("PROOFLOOP_BASE_URL", "https://api.example.com/v1")
     monkeypatch.setenv("PROOFLOOP_API_KEY", "key")
     monkeypatch.setenv("PROOFLOOP_MODEL", "model-x")
