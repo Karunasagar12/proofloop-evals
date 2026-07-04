@@ -20,8 +20,8 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -e . pytest
+          pip install -e .[dev]
       - name: Run tests
         run: pytest -q
-      - name: Run example suite
-        run: proofloop run examples/agent-escalation.yaml --report reports/ci-agent-escalation.html
+      - name: Dry-run attack suite
+        run: proofloop run attacks/direct-override.yaml --dry-run --no-history --report reports/ci-direct-override.html
