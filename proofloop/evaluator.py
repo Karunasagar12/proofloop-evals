@@ -88,7 +88,11 @@ def evaluate_case(
     elif dry_run:
         output = str(case.get("dry_run_output") or DRY_RUN_OUTPUT)
     elif provider and system_prompt:
-        model_response = provider.complete(system_prompt=system_prompt, user_message=input_text)
+        model_response = provider.complete(
+            system_prompt=system_prompt,
+            user_message=input_text,
+            max_tokens=int(case.get("model_max_tokens", 40)),
+        )
         output = model_response.content
     elif provider and not system_prompt:
         raise ValueError(f"Case '{case.get('id')}' has no output and no target.system_prompt.")
