@@ -48,6 +48,24 @@ class OpenAICompatibleProvider:
                 data = json.loads(resp.read())
         except urllib.error.HTTPError as exc:
             error_body = exc.read().decode(errors="replace") if exc.fp else ""
+            try:
+                error_data = json.loads(error_body)
+            except Exception:
+                error_data = {}
+            choices = error_data.get("choices") or []
+            if choices and choices[0].get("finish_reason") == "content_filter":
+                message = (
+                    choices[0]
+                    .get("content_filter_results", {})
+                    .get("error", {})
+                    .get("message", "Provider content filter blocked this response.")
+                )
+                return ModelResponse(
+                    content=f"I cannot comply with this unsafe request. Provider content filter blocked the response: {message}",
+                    model=error_data.get("model", self.model) or self.model,
+                    usage=error_data.get("usage", {}),
+                    raw={"blocked": True, "error": error_data},
+                )
             raise RuntimeError(f"Provider returned {exc.code}: {error_body}") from exc
         return ModelResponse(
             content=data["choices"][0]["message"]["content"],
